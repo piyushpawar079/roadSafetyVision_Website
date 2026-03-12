@@ -15,7 +15,7 @@ import { getCurrentTimestamp } from '@/utils/helpers';
 // GET - Get single user
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -30,7 +30,8 @@ export async function GET(
       );
     }
 
-    const userId = params.id;
+    const { id } = await params;
+    const userId = id;
 
     // Citizens can only view their own profile
     if (session.user.role === 'citizen' && session.user.id !== userId) {
@@ -96,7 +97,7 @@ export async function GET(
 // PATCH - Update user
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -111,7 +112,8 @@ export async function PATCH(
       );
     }
 
-    const userId = params.id;
+    const { id } = await params;
+    const userId = id;
 
     // Citizens can only update their own profile
     // Admins can only update their own profile
@@ -207,7 +209,7 @@ export async function PATCH(
 // DELETE - Soft delete user (super admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -233,7 +235,8 @@ export async function DELETE(
       );
     }
 
-    const userId = params.id;
+    const { id } = await params;
+    const userId = id;
 
     // Prevent self-deletion
     if (session.user.id === userId) {
