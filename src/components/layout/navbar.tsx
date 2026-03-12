@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { cn } from '@/lib/utils';
-import { Logo } from '@/components/ui/logo';
+// import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -54,10 +54,9 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center">
-          {/* <Logo size="sm" /> */}
-          
-        </Link>
+        {/* <Link href="/" className="flex items-center">
+          <Logo size="sm" />
+        </Link> */}
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex md:items-center md:gap-6">

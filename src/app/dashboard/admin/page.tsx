@@ -64,7 +64,7 @@ export default function AdminDashboardPage() {
 
   const stats = {
     totalViolations: violations.length,
-    totalFineAmount: violations[0].total_fine,
+    totalFineAmount: violations[0]?.total_fine,
     pendingReview: pendingReview.length + unidentified.length,
     pendingPayments: pendingPayments.length,
     paidFines: paidToday.length,
