@@ -49,7 +49,18 @@ function loadRegistry(): VehicleRegistry {
       
       // Create empty registry
       const emptyRegistry: VehicleRegistry = {
-        vehicles: [],
+        vehicles: [{
+      "license_plate": "MH01EL2733",
+      "name": "Om Deshmukh",
+      "email": "omdeshmukh.in@gmail.com",
+      "phone": "+91 8369724186",
+      "address": "123 Main Street, Mumbai, Maharashtra 400001",
+      "vehicle_type": "Two Wheeler",
+      "vehicle_make": "Honda",
+      "vehicle_model": "Activa 6G",
+      "vehicle_color": "White",
+      "registration_date": "2022-03-15"
+    }],
         last_updated: new Date().toISOString(),
       };
       
