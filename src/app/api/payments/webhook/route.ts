@@ -8,7 +8,7 @@ import { headers } from 'next/headers';
 import { stripe } from '@/lib/stripe';
 import { adminDb } from '@/lib/firebase-admin';
 import { generateReceiptPDF } from '@/services/pdf.service';
-import { sendPaymentReceiptEmail } from '@/services/email.service';
+// import { sendPaymentReceiptEmail } from '@/services/email.service';
 import { Violation } from '@/types';
 import { getCurrentTimestamp } from '@/utils/helpers';
 import Stripe from 'stripe';
@@ -99,12 +99,12 @@ export async function POST(request: NextRequest) {
                 new Date()
               );
 
-              await sendPaymentReceiptEmail(
-                updatedViolation,
-                violation.citizen_email,
-                violation.citizen_name,
-                receiptPdf
-              );
+              // await sendPaymentReceiptEmail(
+              //   updatedViolation,
+              //   violation.citizen_email,
+              //   violation.citizen_name,
+              //   receiptPdf
+              // );
             } catch (emailError) {
               console.error('Failed to send receipt email:', emailError);
             }
