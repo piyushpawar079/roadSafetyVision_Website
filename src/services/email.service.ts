@@ -14,7 +14,7 @@ const EMAIL_USER = process.env.EMAIL_USER;
 const EMAIL_PASS = process.env.EMAIL_PASS;
 const EMAIL_FROM = process.env.EMAIL_FROM || EMAIL_USER;
 const APP_URL = process.env.NEXTAUTH_URL || 'http://localhost:3000';
-const APP_NAME = 'TrafficGuard';
+const APP_NAME = 'RoadSafetyVision';
 
 // Create transporter
 const transporter = nodemailer.createTransport({
@@ -213,14 +213,6 @@ export async function sendViolationNotification(
                     <p class="info-label">Date & Time</p>
                     <p class="info-value">${formatDate(violation.date)}<br>${violation.time}</p>
                   </div>
-                  <div>
-                    <p class="info-label">Location</p>
-                    <p class="info-value">${violation.location.junction_name}</p>
-                  </div>
-                  <div>
-                    <p class="info-label">Camera ID</p>
-                    <p class="info-value">${violation.location.camera_id}</p>
-                  </div>
                 </div>
               </div>
               
@@ -267,19 +259,6 @@ export async function sendViolationNotification(
                 <p style="font-size: 12px; color: #666;">Or login to your dashboard to view and pay</p>
               </div>
               
-              <!-- Dispute Info -->
-              <div style="background: #f0f9ff; border: 1px solid #0ea5e9; padding: 15px; border-radius: 8px; margin-top: 20px;">
-                <strong>🔍 Dispute this violation?</strong>
-                <p style="margin: 5px 0; font-size: 14px;">
-                  If you believe this violation was issued in error, you can file a dispute through your dashboard within 7 days of receiving this notice.
-                </p>
-              </div>
-            </div>
-            
-            <div class="footer">
-              <p>This is an automated message from ${APP_NAME} Traffic Violation Management System.</p>
-              <p>For support, contact us at support@trafficguard.com</p>
-              <p>&copy; ${new Date().getFullYear()} ${APP_NAME}. All rights reserved.</p>
             </div>
           </div>
         </body>
