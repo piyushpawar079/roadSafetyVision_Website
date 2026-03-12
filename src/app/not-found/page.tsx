@@ -35,10 +35,7 @@ export default function NotFoundPage() {
             </Button>
           </Link>
 
-          <Button variant="outline" onClick={() => window.history.back()}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Go Back
-          </Button>
+          
         </div>
       </div>
     </div>

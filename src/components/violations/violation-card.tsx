@@ -38,7 +38,7 @@ export function ViolationCard({
   showViewButton = true,
 }: ViolationCardProps) {
   // Use document ID if available, fallback to violation_id
-  const linkId = violation.id || violation.violation_id;
+  const linkId = violation.violation_id || violation.violation_id;
   
   return (
     <Card className="overflow-hidden transition-shadow hover:shadow-md">

@@ -49,7 +49,7 @@ export interface ViolationVehicle {
   ocr_confidence: number;
   plate_status: 'VERIFIED' | 'MANUAL_REVIEW' | 'UNIDENTIFIED';
   num_riders: number;
-  bike_detected: boolean;
+  // bike_detected: boolean;
 }
 
 // Individual violation type
@@ -62,16 +62,16 @@ export interface ViolationType {
 
 // Evidence URLs
 export interface ViolationEvidence {
-  violation_full: string;
-  bike_crop: string;
+  violation_full: string | null;
+  bike_crop: string | null;
   plate_crop: string | null;
   plate_processed: string | null;
 }
 
 // Processing metadata
-export interface ProcessingMetadata {
-  frame_timestamp: number;
-}
+// export interface ProcessingMetadata {
+//   frame_timestamp: number;
+// }
 
 // Complete violation document structure (matches edge system schema exactly)
 export interface Violation {
@@ -87,15 +87,16 @@ export interface Violation {
   payment_status: 'PENDING' | 'PAID';
   evidence: ViolationEvidence;
   signal_state: 'RED' | 'GREEN';
-  processing_metadata: ProcessingMetadata;
+  frame_timestamp: number;
   // Additional fields we add
-  citizen_email?: string;
-  citizen_name?: string;
-  citizen_phone?: string;
+  citizen_email: string | null;
+  citizen_name: string | null;
+  citizen_phone: string | null;
   notification_sent: boolean;
   created_at: number;
   updated_at: number;
   is_deleted: boolean;
+  doc_id?: string;
 }
 
 // Admin access request
@@ -140,4 +141,9 @@ export interface ApiResponse<T = unknown> {
   message: string;
   data?: T;
   error?: string;
+  meta?: {
+    page: any,
+    limit: any,
+    total: number 
+  }
 }

@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Logo } from '@/components/ui/logo';
 import { AlertTriangle, ArrowLeft, RefreshCw } from 'lucide-react';
+import { Suspense } from 'react';
 
 const errorMessages: Record<string, string> = {
   Configuration: 'There is a problem with the server configuration.',
@@ -27,7 +28,8 @@ const errorMessages: Record<string, string> = {
   Default: 'An unexpected error occurred.',
 };
 
-export default function AuthErrorPage() {
+// ✅ Inner component that uses useSearchParams
+function AuthErrorContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
 
@@ -82,5 +84,18 @@ export default function AuthErrorPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+// ✅ Default export wraps the content in Suspense
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+        <div className="text-muted-foreground text-sm">Loading...</div>
+      </div>
+    }>
+      <AuthErrorContent />
+    </Suspense>
   );
 }

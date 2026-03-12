@@ -69,7 +69,9 @@ export default function SuperAdminDashboardPage() {
     totalViolations: violations.length,
     totalUsers: users.filter((u) => u.role === 'citizen').length,
     pendingRequests: adminRequests.length,
-    totalCollected,
+    paidFines: totalCollected,
+    pendingPayments: violations[0].total_fine - totalCollected,
+    totalFineAmount: violations[0].total_fine
   };
 
   // Chart data

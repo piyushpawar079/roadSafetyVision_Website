@@ -46,7 +46,7 @@ export async function GET(
     let docId = violationId;
 
     if (violationDoc.exists) {
-      violation = { id: violationDoc.id, ...violationDoc.data() } as Violation;
+      violation = { violation_id: violationDoc.id, ...violationDoc.data() } as Violation;
     } else {
       // If not found by doc ID, try to find by violation_id field
       console.log('Document not found by ID, searching by violation_id field...');
@@ -59,7 +59,7 @@ export async function GET(
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         docId = doc.id;
-        violation = { id: doc.id, ...doc.data() } as Violation;
+        violation = { violation_id: doc.id, ...doc.data() } as Violation;
         console.log('Found violation by violation_id field, doc ID:', docId);
       }
     }
@@ -243,7 +243,7 @@ export async function PATCH(
       try {
         // Get full updated violation
         const updatedDoc = await violationRef.get();
-        const fullViolation = { id: docId, ...updatedDoc.data() } as Violation;
+        const fullViolation = { violation_id: docId, ...updatedDoc.data() } as Violation;
 
         // Send email notification
         const emailSent = await sendViolationNotification(
@@ -270,7 +270,7 @@ export async function PATCH(
         data: {
           violation_id: violationId,
           doc_id: docId,
-          new_plate: license_plate.toUpperCase(),
+          new_plate : license_plate.toUpperCase(),
           plate_status: newPlateStatus,
           notification_sent: notificationSent,
         },

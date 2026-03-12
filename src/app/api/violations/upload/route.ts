@@ -32,17 +32,17 @@ interface UploadPayload {
   vehicle: {
     license_plate: string;
     ocr_confidence: number;
-    plate_status: string;
+    plate_status: 'VERIFIED' | 'MANUAL_REVIEW' | 'UNIDENTIFIED';
     num_riders: number;
-  };
+  }; 
   violations: Array<{
-    type: string;
-    description: string;
-    fine_amount: number;
-    severity: string;
+    type: 'NO_HELMET' | 'TRIPLE_RIDING' | 'SIGNAL_JUMP' | 'ZEBRA_CROSSING';
+  description: string;
+  fine_amount: number;
+  severity: 'MEDIUM' | 'HIGH' | 'CRITICAL';
   }>;
   total_fine: number;
-  signal_state: string;
+  signal_state: 'RED' | 'GREEN';
   images: {
     violation_full?: string | null;
     bike_crop?: string | null;
@@ -192,12 +192,17 @@ export async function POST(request: NextRequest) {
       }
     }
 
+
     // Create violation document
     const violationData: Omit<Violation, 'id'> = {
       violation_id: body.violation_id,
       timestamp: body.timestamp,
       date: body.date,
       time: body.time,
+      datetime: body.date,
+      frame_timestamp: body.timestamp,
+      is_deleted: false,
+
 
       location: {
         junction_name: body.location.junction_name,

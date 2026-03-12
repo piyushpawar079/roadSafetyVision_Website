@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
 
       snapshot.forEach((doc) => {
         violations.push({
-          id: doc.id,
+          violation_id: doc.id,
           ...doc.data(),
         } as Violation);
       });
@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
 
       snapshot.forEach((doc) => {
         violations.push({
-          id: doc.id,
+          violation_id: doc.id,
           ...doc.data(),
         } as Violation);
       });
@@ -192,6 +192,9 @@ export async function POST(request: NextRequest) {
       timestamp: timestamp.getTime(),
       date: timestamp.toISOString().split('T')[0],
       time: timestamp.toTimeString().split(' ')[0],
+      datetime: timestamp.toISOString().split('T')[0],
+      frame_timestamp: 0,
+      is_deleted: false,
       location: body.location,
       vehicle: body.vehicle,
       violations: body.violations,

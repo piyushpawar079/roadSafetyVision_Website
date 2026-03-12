@@ -49,7 +49,7 @@ export function PlateEditor({
 
     if (result?.success) {
       toast.success('License plate updated successfully');
-      if (result.data?.notification_sent) {
+      if ((result.data as any)?.notification_sent) {
         toast.info('Notification sent to vehicle owner');
       }
       setOpen(false);

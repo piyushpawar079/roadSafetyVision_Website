@@ -131,7 +131,7 @@ export default function ViolationDetailPage({ params }: ViolationDetailPageProps
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <PageHeader
-          title={`Violation ${violation.violation_id?.slice(0, 15) || violation.id?.slice(0, 8)}...`}
+          title={`Violation ${violation.violation_id?.slice(0, 15) || violation.violation_id?.slice(0, 8)}...`}
           description={`Recorded on ${formatDate(violation.date)} at ${formatTime(violation.time)}`}
         />
       </div>
@@ -286,9 +286,9 @@ export default function ViolationDetailPage({ params }: ViolationDetailPageProps
                   <p className="font-mono text-lg font-bold">
                     {violation.vehicle?.license_plate || 'UNKNOWN'}
                   </p>
-                  {isAdmin && violation.id && (
+                  {isAdmin && violation.violation_id && (
                     <PlateEditor
-                      violationId={violation.id}
+                      violationId={violation.violation_id}
                       currentPlate={violation.vehicle?.license_plate || ''}
                       onUpdate={fetchViolation}
                     />
@@ -387,7 +387,7 @@ export default function ViolationDetailPage({ params }: ViolationDetailPageProps
                     {formatCurrency(violation.total_fine || 0)}
                   </p>
                 </div>
-                <Link href={`/dashboard/payments?violation=${violation.id}`}>
+                <Link href={`/dashboard/payments?violation=${violation.violation_id}`}>
                   <Button className="mt-4 w-full" size="lg">
                     <CreditCard className="mr-2 h-5 w-5" />
                     Pay Fine Now
