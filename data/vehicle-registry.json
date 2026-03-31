@@ -13,9 +13,9 @@
       "registration_date": "2022-03-15"
     },
     {
-      "license_plate": "MH02CD5678",
-      "name": "Priya Patel",
-      "email": "priya.patel@example.com",
+      "license_plate": "MH01CB0354",
+      "name": "David Dennis",
+      "email": "davidennis2124@gmail.com",
       "phone": "+91 87654 32109",
       "address": "456 Park Avenue, Pune, Maharashtra 411001",
       "vehicle_type": "Two Wheeler",
@@ -27,7 +27,7 @@
     {
       "license_plate": "MH03EF9012",
       "name": "Amit Kumar",
-      "email": "amit.kumar@example.com",
+      "email": "suryavanshilaukik@gmail.com",
       "phone": "+91 76543 21098",
       "address": "789 Lake Road, Nagpur, Maharashtra 440001",
       "vehicle_type": "Two Wheeler",
