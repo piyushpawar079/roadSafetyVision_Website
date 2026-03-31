@@ -143,9 +143,9 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 text-center">
-          <Link href="/" className="inline-block">
+          {/* <Link href="/" className="inline-block">
             <Logo size="lg" />
-          </Link>
+          </Link> */}
         </div>
 
         <Card className="border-0 shadow-xl">
@@ -492,9 +492,9 @@ function OTPVerification({ email }: { email: string }) {
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 to-slate-100">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <Link href="/" className="inline-block">
+          {/* <Link href="/" className="inline-block">
             <Logo size="lg" />
-          </Link>
+          </Link> */}
         </div>
 
         <Card className="border-0 shadow-xl">

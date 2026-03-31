@@ -248,7 +248,8 @@ export async function POST(request: NextRequest) {
 
     // Save to Firestore
     console.log(`💾 Saving to Firestore...`);
-    const docRef = await adminDb.collection('violations').add(violationData);
+    const docRef = adminDb.collection('violations').doc(body.violation_id);
+    await docRef.set(violationData);
     console.log(`   Document ID: ${docRef.id}`);
 
     // Send notification email if citizen found

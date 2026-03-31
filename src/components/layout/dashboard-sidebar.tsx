@@ -63,6 +63,12 @@ const navItems: NavItem[] = [
     roles: ['super_admin'],
   },
   {
+    title: 'Admin Request',
+    href: '/dashboard/request-admin',
+    icon: UserCheck,
+    roles: ['citizen']
+  },
+  {
     title: 'Users',
     href: '/dashboard/users',
     icon: Users,
@@ -130,11 +136,11 @@ export function DashboardSidebar({
     >
       {/* Header */}
       <div className="flex h-16 items-center justify-between border-b px-4">
-        {!collapsed && (
-          <Link href="/">
-            <Logo size="sm" />
-          </Link>
-        )}
+        {!collapsed 
+          // <Link href="/">
+          //   <Logo size="sm" />
+          // </Link>
+        }
         <Button
           variant="ghost"
           size="icon"

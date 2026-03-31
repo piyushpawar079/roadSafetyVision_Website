@@ -97,6 +97,10 @@ export interface Violation {
   updated_at: number;
   is_deleted: boolean;
   doc_id?: string;
+
+  payment_id?: string;
+  payment_date?: number;
+  transaction_id?: string;
 }
 
 // Admin access request
@@ -112,18 +116,18 @@ export interface AdminRequest {
 }
 
 // Payment record
-export interface Payment {
-  id: string;
-  violation_id: string;
-  user_id: string;
-  user_email: string;
-  amount: number;
-  stripe_session_id: string;
-  stripe_payment_intent?: string;
-  status: 'pending' | 'completed' | 'failed';
-  created_at: number;
-  completed_at?: number;
-}
+// export interface Payment {
+//   id: string;
+//   violation_id: string;
+//   user_id: string;
+//   user_email: string;
+//   amount: number;
+//   stripe_session_id: string;
+//   stripe_payment_intent?: string;
+//   status: 'pending' | 'completed' | 'failed';
+//   created_at: number;
+//   completed_at?: number;
+// }
 
 // OTP record
 export interface OTPRecord {
@@ -146,4 +150,45 @@ export interface ApiResponse<T = unknown> {
     limit: any,
     total: number 
   }
+}
+
+export interface Payment {
+  id: string;                    // Firebase document ID
+  payment_id: string;            // Generated ID (PAY_YYYYMMDD_HHMMSS)
+  
+  // Violation details
+  violation_id: string;          // Reference to violation document ID
+  violation_number: string;      // Violation ID for display
+  
+  // User details
+  user_id: string;
+  user_email: string;
+  user_name: string;
+  user_phone?: string;
+  
+  // Payment details
+  amount: number;
+  payment_method: 'demo_payment' | 'card' | 'upi' | 'netbanking';
+  payment_status: 'pending' | 'completed' | 'failed';
+  
+  // Transaction details
+  transaction_id: string;        // Demo transaction ID
+  payment_date: number;          // Timestamp
+  
+  // Additional info
+  license_plate: string;
+  violation_type: string;
+  
+  // Metadata
+  created_at: number; 
+  updated_at: number;
+}
+ 
+export interface PaymentStats {
+  total_payments: number;
+  total_amount: number;
+  pending_payments: number;
+  pending_amount: number;
+  completed_payments: number;
+  completed_amount: number;
 }

@@ -94,9 +94,9 @@ function LoginContent() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 text-center">
-          <Link href="/" className="inline-block">
+          {/* <Link href="/" className="inline-block">
             <Logo size="lg" />
-          </Link>
+          </Link> */}
         </div>
 
         <Card className="border-0 shadow-xl">

@@ -59,7 +59,7 @@ export async function GET(request: NextRequest) {
 
       snapshot.forEach((doc) => {
         violations.push({
-          violation_id: doc.id,
+          doc_id: doc.id,
           ...doc.data(),
         } as Violation);
       });
@@ -82,6 +82,7 @@ export async function GET(request: NextRequest) {
       }
 
       const snapshot = await query.get();
+      console.log(snapshot)
 
       snapshot.forEach((doc) => {
         violations.push({

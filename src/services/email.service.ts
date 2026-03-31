@@ -123,6 +123,158 @@ export async function sendOTPEmail(
   }
 }
 
+
+export async function sendPaymentSuccessEmail(
+  email: string,
+  name: string,
+  payment: any
+): Promise<boolean> {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: parseInt(process.env.EMAIL_PORT || '587'),
+      secure: false,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+ 
+    const formattedAmount = new Intl.NumberFormat('en-IN', {
+      style: 'currency',
+      currency: 'INR',
+    }).format(payment.amount);
+ 
+    const paymentDate = new Date(payment.payment_date).toLocaleString('en-IN', {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    });
+ 
+    const mailOptions = {
+      from: process.env.EMAIL_FROM || 'noreply@trafficguard.com',
+      to: email,
+      subject: '✅ Payment Successful - Traffic Violation',
+      html: `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 30px; text-align: center; border-radius: 10px 10px 0 0; }
+            .header h1 { margin: 0; font-size: 28px; }
+            .content { background: #f9fafb; padding: 30px; border-radius: 0 0 10px 10px; }
+            .success-badge { background: #10b981; color: white; padding: 10px 20px; border-radius: 20px; display: inline-block; margin: 20px 0; font-weight: bold; }
+            .info-box { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981; }
+            .info-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #e5e7eb; }
+            .info-row:last-child { border-bottom: none; }
+            .label { font-weight: bold; color: #6b7280; }
+            .value { color: #111827; }
+            .amount { font-size: 32px; font-weight: bold; color: #10b981; text-align: center; margin: 20px 0; }
+            .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 14px; }
+            .button { background: #10b981; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 20px 0; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🎉 Payment Successful!</h1>
+            </div>
+            <div class="content">
+              <p>Dear ${name},</p>
+              
+              <p>Your payment has been successfully processed. Thank you for settling your traffic violation fine promptly.</p>
+              
+              <div class="success-badge">✓ PAYMENT COMPLETED</div>
+              
+              <div class="amount">${formattedAmount}</div>
+              
+              <div class="info-box">
+                <h3 style="margin-top: 0; color: #111827;">Payment Details</h3>
+                
+                <div class="info-row">
+                  <span class="label">Transaction ID:</span>
+                  <span class="value">${payment.transaction_id}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Payment ID:</span>
+                  <span class="value">${payment.payment_id}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Payment Date:</span>
+                  <span class="value">${paymentDate}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Payment Method:</span>
+                  <span class="value">Demo Payment</span>
+                </div>
+              </div>
+              
+              <div class="info-box">
+                <h3 style="margin-top: 0; color: #111827;">Violation Details</h3>
+                
+                <div class="info-row">
+                  <span class="label">Violation Number:</span>
+                  <span class="value">${payment.violation_number}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">License Plate:</span>
+                  <span class="value">${payment.license_plate}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Violation Type:</span>
+                  <span class="value">${payment.violation_type}</span>
+                </div>
+                
+                <div class="info-row">
+                  <span class="label">Fine Amount:</span>
+                  <span class="value">${formattedAmount}</span>
+                </div>
+              </div>
+              
+              <p style="margin-top: 30px;">
+                <strong>What's Next?</strong><br>
+                • Your violation status has been updated to "PAID"<br>
+                • You can view your payment receipt anytime in your dashboard<br>
+                • Keep this email for your records
+              </p>
+              
+              <div style="text-align: center;">
+                <a href="${process.env.NEXTAUTH_URL}/dashboard/citizen" class="button">
+                  View Dashboard
+                </a>
+              </div>
+              
+              <p style="color: #6b7280; font-size: 14px; margin-top: 30px;">
+                If you have any questions about this payment, please contact our support team.
+              </p>
+            </div>
+            
+            <div class="footer">
+              <p>This is an automated email from TrafficGuard System.</p>
+              <p>© ${new Date().getFullYear()} TrafficGuard. All rights reserved.</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `,
+    };
+ 
+    await transporter.sendMail(mailOptions);
+    console.log(`Payment success email sent to ${email}`);
+    return true;
+ 
+  } catch (error) {
+    console.error('Error sending payment success email:', error);
+    return false;
+  }
+}
+
 /**
  * Send violation notification email to vehicle owner
  */
