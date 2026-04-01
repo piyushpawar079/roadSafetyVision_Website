@@ -69,7 +69,7 @@ export default function HomePage() {
       {/* Navigation */}
       <nav className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-lg">
         <div className="container flex h-16 items-center justify-between">
-          <Logo />
+          {/* <Logo /> */}
           <div className="flex items-center gap-4">
             <Link href="/auth/login">
               <Button variant="ghost">Sign In</Button>
