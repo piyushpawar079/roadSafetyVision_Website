@@ -714,7 +714,7 @@ export default function ViolationDetailPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                <div>
+                {/* <div>
                   <p className="text-sm text-gray-600">Location</p>
                   <div className="flex items-center gap-2 mt-1">
                     <MapPin className="h-4 w-4 text-gray-500" />
@@ -722,7 +722,7 @@ export default function ViolationDetailPage({ params }: PageProps) {
                       {violation.location?.junction_name || 'N/A'}
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
 
               <div>
@@ -899,7 +899,7 @@ export default function ViolationDetailPage({ params }: PageProps) {
           </Card>
 
           {/* Location Details */}
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <MapPin className="h-5 w-5" />
@@ -945,7 +945,7 @@ export default function ViolationDetailPage({ params }: PageProps) {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </div>
 
         {/* ── Right sidebar ── */}
