@@ -245,7 +245,7 @@ export async function sendPaymentSuccessEmail(
               </p>
               
               <div style="text-align: center;">
-                <a href="${process.env.NEXTAUTH_URL}/dashboard/citizen" class="button">
+                <a href="${APP_URL}/dashboard/citizen" class="button">
                   View Dashboard
                 </a>
               </div>
@@ -405,7 +405,7 @@ export async function sendViolationNotification(
               
               <!-- Pay Button -->
               <div style="text-align: center;">
-                <a href="${APP_URL}/dashboard/payments/pay/${violation.violation_id}" class="pay-button">
+                <a href="${APP_URL}/dashboard/violations/${violation.violation_id}" class="pay-button">
                   Pay Fine Now
                 </a>
                 <p style="font-size: 12px; color: #666;">Or login to your dashboard to view and pay</p>
@@ -520,7 +520,7 @@ export async function sendPaymentConfirmation(
               </p>
               
               <div style="text-align: center; margin-top: 20px;">
-                <a href="${APP_URL}/dashboard/payments/history" style="display: inline-block; background: #2563eb; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px;">
+                <a href="${APP_URL}/dashboard/violations" style="display: inline-block; background: #2563eb; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px;">
                   View Payment History
                 </a>
               </div>
