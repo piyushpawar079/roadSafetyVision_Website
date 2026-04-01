@@ -252,7 +252,7 @@ export default function HomePage() {
       <footer className="border-t py-12">
         <div className="container">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <Logo size="sm" />
+            {/* <Logo size="sm" /> */}
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} TrafficGuard. All rights reserved.
             </p>
